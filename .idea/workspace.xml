@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6367f3df-069b-4b81-93f2-4d9da4845703" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/apps.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/migrations/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/course/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/apps.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/migrations/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/organization/views.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/admin.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/apps.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/tests.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/users/views.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/users/migrations/__init__.py" afterPath="$PROJECT_DIR$/apps/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/EDU_ONLINE.iml" afterPath="$PROJECT_DIR$/.idea/EDU_ONLINE.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EDU_ONLINE/settings.py" afterPath="$PROJECT_DIR$/EDU_ONLINE/settings.py" />
-    </list>
+    <list default="true" id="6367f3df-069b-4b81-93f2-4d9da4845703" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +21,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EDU_ONLINE/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+            <state relative-caret-position="-198">
+              <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
               <folding>
                 <element signature="e#311#320#0" expanded="true" />
               </folding>
@@ -478,11 +452,19 @@
       <option name="presentableId" value="Default" />
       <updated>1527752860265</updated>
     </task>
+    <task id="LOCAL-00001" summary="模型类完成，app整理">
+      <created>1527846349021</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1527846349021</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="21" width="1305" height="594" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09118774" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -509,6 +491,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="模型类完成，app整理" />
+    <option name="LAST_COMMIT_MESSAGE" value="模型类完成，app整理" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -622,8 +608,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/EDU_ONLINE/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="64" column="5" lean-forward="true" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+        <state relative-caret-position="-198">
+          <caret line="54" column="48" lean-forward="true" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
           <folding>
             <element signature="e#311#320#0" expanded="true" />
           </folding>

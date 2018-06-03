@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'users',
     'course',
     'operation',
-    'organization'
+    'organization',
+    'xadmin',
+    'crispy_forms'
 ]
 
 AUTH_USER_MODEL = 'users.UserProfile'
@@ -64,7 +66,7 @@ ROOT_URLCONF = 'EDU_ONLINE.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

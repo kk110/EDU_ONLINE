@@ -21,6 +21,9 @@ class Course(models.Model):
         verbose_name = '课程'
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
 
 class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
@@ -31,6 +34,9 @@ class Lesson(models.Model):
         verbose_name = '章节'
         verbose_name_plural = verbose_name
         db_table = 'Lesson'
+
+    def __str__(self):
+        return self.name
 
 
 class Video(models.Model):
@@ -43,6 +49,9 @@ class Video(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'Video'
 
+    def __str__(self):
+        return self.name
+
 
 class CourseResource(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程')
@@ -54,4 +63,7 @@ class CourseResource(models.Model):
         verbose_name = '课程资源'
         verbose_name_plural = verbose_name
         db_table = 'CourseResource'
+
+    def __str__(self):
+        return self.name
 

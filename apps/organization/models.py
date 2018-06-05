@@ -15,6 +15,9 @@ class CityDict(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'CityDict'
 
+    def __str__(self):
+        return self.name
+
 
 class CourseOrg(models.Model):
     name = models.CharField(max_length=50, verbose_name="机构名")
@@ -31,18 +34,25 @@ class CourseOrg(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'CourseOrg'
 
+    def __str__(self):
+        return  self.name
+
 
 class Teacher(models.Model):
     name = models.CharField(max_length=50, verbose_name="姓名")
     work_years = models.IntegerField(default=0, verbose_name='工作年限')
-    position =  models.CharField(max_length=50, verbose_name="职位")
+    position = models.CharField(max_length=50, verbose_name="职位")
     work_company = models.CharField(max_length=50, verbose_name="公司名称")
     points = models.CharField(max_length=50,verbose_name='教学特点')
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
     fav_nums = models.IntegerField(default=0, verbose_name='收藏数')
     org = models.ForeignKey(CourseOrg,verbose_name='所属机构')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
         verbose_name = "教师"
         verbose_name_plural = verbose_name
         db_table = 'Teacher'
+
+    def __str__(self):
+        return self.name

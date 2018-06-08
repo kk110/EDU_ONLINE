@@ -27,7 +27,7 @@ SECRET_KEY = 'eonaoof((se8x&-gzh-*1&#$o-v!n*-xwsye8kkuc1u2m0jov$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.136.128']
 
 
 # Application definition
@@ -44,11 +44,15 @@ INSTALLED_APPS = [
     'operation',
     'organization',
     'xadmin',
-    'crispy_forms'
+    'crispy_forms',             #xadmin依赖
+    'captcha',
+
 ]
 
 AUTH_USER_MODEL = 'users.UserProfile'
-
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackends',        # 自定义user验证使用邮箱和用户名
+)
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,3 +138,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)

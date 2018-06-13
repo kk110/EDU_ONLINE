@@ -141,3 +141,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+# send_email setting
+EMAIL_USE_TLS = False
+EMAIL_HOST = ' smtp.163.com'  # 如果是 163 改成 smtp.163.com
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'klk_1115@163.com' # 帐号
+EMAIL_HOST_PASSWORD = ''  # 密码
+DEFAULT_FROM_EMAIL = 'klk_1115@163.com'

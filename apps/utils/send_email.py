@@ -7,28 +7,28 @@ from django.conf import settings
 from django.core.mail import send_mail
 from users.models import EmailVerifyRecord
 
+
 def create_random_code(codelen):
     active_code = ''
     ran_str = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz'
     for _ in range(codelen):
-        flag = random.randint(len(ran_str))
+        flag = random.randint(0, len(ran_str)-1)
         active_code += ran_str[flag]
-    return  active_code
+    return active_code
 
 
-def send_active_mail(receive_email, send_type):
+def send_mails(receive_email, send_type):
     if send_type == "register":
         sender = settings.EMAIL_HOST_USER
         active_code = create_random_code(18)
-        send_code = """<a>""" + active_code + """</a>"""
         email_title = '欢迎注册慕学网'
-        email_content = '点击下方链接激活您的账户:' + send_code
+        email_content = "<h1>点击下方链接激活您的账户:<a href='%s'>http://192.168.136.128:8000/active/%s</a></h1>"%(active_code,active_code)
         send_status = send_mail(email_title, email_content, sender, [receive_email])
         if send_status == 1:
             record = EmailVerifyRecord()
             record.code = active_code
             record.email = receive_email
             record.send_type = send_type
-        return  send_status
+        return send_status
 
 

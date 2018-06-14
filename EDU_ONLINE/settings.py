@@ -142,11 +142,18 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-
 # send_email setting
-EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = ' smtp.163.com'  # 如果是 163 改成 smtp.163.com
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'klk_1115@163.com' # 帐号
-EMAIL_HOST_PASSWORD = ''  # 密码
-DEFAULT_FROM_EMAIL = 'klk_1115@163.com'
+EMAIL_HOST_PASSWORD = 'studyuse5'  # 邮箱授权密码
+EMAIL_FROM = '慕学在线<muxueOnline@163.com>'
+
+
+# celery-rabbitmq
+# import djcelery
+# djcelery.setup_loader()
+BROKER_URL = 'amqp://guest:guest@localhost:5672'  # broker 代理地址
+# CELERY_RESULT_BACKEND = 'redis://192.168.136.128:6379' # 数据存储地址,不配置默认使用后台数据库
+

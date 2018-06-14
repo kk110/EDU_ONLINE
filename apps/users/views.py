@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
@@ -7,6 +8,7 @@ from django.views.generic.base import View
 from django.core.urlresolvers import reverse
 from .models import UserProfile
 from .forms import LoginForm,RegisterForm
+from .tasks import hello_word,send_active_email
 # Create your views here.
 
 class CustomBackends(ModelBackend):
@@ -51,7 +53,8 @@ class LoginView(View):
 class RegisterView(View):
     def get(self,request):
         register_form = RegisterForm()
-        return render(request, 'register.html', {'register_form':register_form})
+        return render(request, 'register.html', {'register_form': register_form})
+
     def post(self,request):
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
@@ -66,6 +69,16 @@ class RegisterView(View):
             user.password = make_password(password)
             user.is_active = False
             user.save()
+
+            # 发送激活邮件
+
             return render(request, 'login.html')
         else:
             return render(request, 'register.html', {'register_form': register_form})
+
+
+def home(request):
+    if request.method == "GET":
+        # hello_word.delay()
+        send_active_email.delay('klk_1115@163.com', 'register')
+    return HttpResponse('测试celery')

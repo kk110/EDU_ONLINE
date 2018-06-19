@@ -27,7 +27,7 @@ SECRET_KEY = 'eonaoof((se8x&-gzh-*1&#$o-v!n*-xwsye8kkuc1u2m0jov$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.136.128']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -142,18 +142,41 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# send_email setting
+
+# 邮件发送配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = ' smtp.163.com'  # 如果是 163 改成 smtp.163.com
+EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'klk_1115@163.com' # 帐号
-EMAIL_HOST_PASSWORD = 'studyuse5'  # 邮箱授权密码
+# 发送邮件的邮箱
+EMAIL_HOST_USER = 'klk_1115@163.com'
+# 在邮箱中设置的客户端授权密码
+EMAIL_HOST_PASSWORD = 'studyuse5'
+# 收件人看到的发件人
 EMAIL_FROM = '慕学在线<muxueOnline@163.com>'
+
+# 设置django缓存-redis
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/6",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    "result": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/7",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 
 # celery-rabbitmq
 # import djcelery
 # djcelery.setup_loader()
 BROKER_URL = 'amqp://guest:guest@localhost:5672'  # broker 代理地址
-# CELERY_RESULT_BACKEND = 'redis://192.168.136.128:6379' # 数据存储地址,不配置默认使用后台数据库
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/7' # 数据存储地址,不配置默认使用后台数据库 执行结果存储
+
 

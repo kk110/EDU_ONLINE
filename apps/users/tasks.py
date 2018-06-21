@@ -13,6 +13,4 @@ def hello_word():
 @app.task
 def send_asyn_active_email(to_email, send_type, u_id):
     task_status = send_register_active_email(to_email, send_type, u_id)
-    print("===task status===")
-    print(task_status)
     return task_status

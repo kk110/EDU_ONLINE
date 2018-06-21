@@ -45,10 +45,11 @@ class LoginView(View):
             pass_word = request.POST.get('password', '')
             user = authenticate(username=user_name, password=pass_word)
             if user is not None:
-                login(request, user)
-                return render(request, 'index.html')
-            elif user.is_active == 0:
-                return render(request, 'login.html', {'message': '用户未激活'})
+                if user.is_active == 0:
+                    return render(request, 'login.html', {'message': '用户未激活,请前往邮箱激活'})
+                else:
+                    login(request, user)
+                    return render(request, 'index.html')
             else:
                 return render(request, 'login.html', {'message': '用户名或密码错误！'})
         else:
@@ -79,13 +80,14 @@ class RegisterView(View):
             # 发送激活邮件
             send_type = 'register'
             status = send_asyn_active_email.delay(email, send_type, user_profile.id)
-            print("=====view status====")
+            print('----status----')
             print(status)
             key_name = "celery-task-meta-" + str(status)
             conn = get_redis_connection('result')
             result = conn.get(key_name)
-            result = result.decode('utf-8')
-            if 'SUCCESS' in result:
+            # if result is None:
+            success = 'SUCCESS'.encode()
+            if success in result:
                 return render(request, 'login.html', {'register_form': register_form})
             else:
                 return render(request, 'register.html', {'register_form': register_form, 'msg': '邮件发送失败'})
@@ -100,6 +102,7 @@ class ActiveEmailView(View):
         serializer = Serializer(settings.SECRET_KEY)
         active_code = serializer.loads(code)
         confirm = active_code["confirm"]
+        print(confirm)
         matchObj = re.match(r'^(.*)?(\d)$', confirm)
         user_id = matchObj.group(2)
         print("=====----")
@@ -114,16 +117,18 @@ class ActiveEmailView(View):
             username = user_profile.username
             return render(request, 'index.html', {'username': username})
         else:
-            return render(request, 'register.html', {'msg': '激活链接已失效', 'user_id': user_id})
+            return render(request, 'login.html', {'msg': '激活链接已失效', 'user_id': user_id})
 
 
 # 重发激活邮件
 def reActiveEmail(request):
-    user_id = request.GET.get('id')
-    user_profile = UserProfile.objects.get(id=user_id)
+    u_id = request.GET.get('id')
+    print("----chong fa you jian---")
+    print(u_id)
+    user_profile = UserProfile.objects.get(id=u_id)
     to_email = user_profile.email
     send_type = 'register'
-    status = send_asyn_active_email.delay(to_email, send_type, user_id)
+    status = send_asyn_active_email.delay(to_email, send_type, u_id)
     return JsonResponse({'status': status})
 
 

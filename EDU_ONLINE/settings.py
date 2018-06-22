@@ -145,14 +145,14 @@ STATICFILES_DIRS = (
 
 # 邮件发送配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 # 发送邮件的邮箱
-EMAIL_HOST_USER = 'klk_1115@163.com'
+EMAIL_HOST_USER = '417115351@qq.com'
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'studyuse5'
+EMAIL_HOST_PASSWORD = 'kwcoviyakgqncacf'
 # 收件人看到的发件人
-EMAIL_FROM = '慕学在线<muxueOnline@163.com>'
+EMAIL_FROM = '慕学在线<muxueOnline@qq.com>'
 
 # 设置django缓存-redis
 CACHES = {

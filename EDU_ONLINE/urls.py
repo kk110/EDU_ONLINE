@@ -19,6 +19,7 @@ import xadmin
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
-    url(r'^', include("users.urls", namespace='user')),
-    url(r'^captcha/', include('captcha.urls'))
+    url(r'^user/', include("users.urls", namespace='user')),
+    url(r'^captcha/', include('captcha.urls')),
+    url(r'^course/', include("course.urls", namespace='course'))
 ]

@@ -86,14 +86,14 @@
 						<ul>
 							<li class="active" ><a href="index.html">首页</a></li>
 							<li >
-								<a href="/course/course-list">
+								<a href="{% url 'org:courseList' %}">
 									公开课<img class="hot" src="{% static "images/nav_hot.png"%}">
 								</a>
 							</li>
 							<li >
-								<a href="/course/teachers-list">授课教师</a>
+								<a href="{% url 'org:teacherList' %}">授课教师</a>
 							</li>
-							<li ><a href="/course/org-list">授课机构</a></li>
+							<li ><a href="{% url 'org:orgList' %}">授课机构</a></li>
 						</ul>
 					</div>
 				</div>

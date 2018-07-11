@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^user/', include("users.urls", namespace='user')),
     url(r'^captcha/', include('captcha.urls')),
-    url(r'^course/', include("course.urls", namespace='course'))
+    url(r'^org/', include("organization.urls", namespace='org')),
 ]

@@ -18,6 +18,7 @@ from .tasks import hello_word, send_asyn_active_email
 # Create your views here.
 conn = get_redis_connection('default')
 
+
 class CustomBackends(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
@@ -26,13 +27,6 @@ class CustomBackends(ModelBackend):
                 return user
         except Exception as e:
             return None
-
-def index(request):
-    return render(request, 'index.html')
-
-
-def register(request):
-    pass
 
 
 class LoginView(View):
@@ -124,10 +118,6 @@ class ActiveEmailView(View):
             return render(request, 'login.html', {'msg': '激活链接已失效', 'user_id': user_id})
 
 
-def find_page(request):
-    if request.method == 'get':
-        return render(request, 'forgetpwd.html')
-
 # 找回密码页面
 class ForgetPassword(View):
     def get(self, request):
@@ -183,6 +173,18 @@ def reActiveEmail(request):
     status = send_asyn_active_email.delay(to_email, send_type, u_id)
     return JsonResponse({'status': status})
 
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def register(request):
+    pass
+
+
+def find_page(request):
+    if request.method == 'get':
+        return render(request, 'forgetpwd.html')
 
 
 # def myMail(request):

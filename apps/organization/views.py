@@ -1,4 +1,7 @@
+import  re
+
 from django.shortcuts import render
+from django.http import JsonResponse
 from django.views.generic.base import View
 from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
@@ -81,4 +84,19 @@ class orgList(View):
         return render(request, 'org-list.html', params)
 
     def post(self, request):
-        pass
+        name = request.POST.get('name', '')
+        mobile = request.POST.get('mobile', '')
+        course_name = request.POST.get('course_name', '')
+
+        if all[name, mobile, course_name]:
+            result = re.match(r'^\d{11}$', mobile)
+            result = result.group()
+            if result is None:
+                return JsonResponse({'err': '请输入正确格式的手机号'})
+
+            name_pattern = re.compile(r'^\w+$')
+            name_result = re.match(name_pattern, name)
+            if name_result.group() is None:
+                return JsonResponse({'err': '请输入合法的用户名'})
+
+

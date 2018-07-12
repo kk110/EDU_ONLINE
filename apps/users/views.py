@@ -29,6 +29,7 @@ class CustomBackends(ModelBackend):
             return None
 
 
+# 登录
 class LoginView(View):
     def get(self, request):
         return render(request, 'login.html')
@@ -52,6 +53,7 @@ class LoginView(View):
             return render(request, 'login.html', {'login_form': login_form})
 
 
+# 注册
 class RegisterView(View):
     def get(self, request):
         register_form = RegisterForm()
@@ -159,7 +161,7 @@ class ResetPassword(View):
                     user.save()
                     return render(request, 'change_success.html')
         else:
-            return render(request, 'password_reset.html', {'findPasswordForm':FindPasswordForm})
+            return render(request, 'password_reset.html', {'findPasswordForm': FindPasswordForm})
 
 
 # 重发激活邮件

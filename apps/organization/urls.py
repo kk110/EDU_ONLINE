@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'org_list/$', orgList.as_view(), name='orgList'),
 
     # 用于处理media文件下的图片
-    url(r'media/(?P<path>.*)', serve, {'document_root':MEDIA_URL})
+    url(r'media/(?P<path>.*)', serve, {'document_root': MEDIA_URL})
 ]

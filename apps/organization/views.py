@@ -7,13 +7,14 @@ from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import CourseOrg,Teacher,CityDict
+from course.models import Course
 from operation.models import UserAsk
 from .forms import UserAskForm
 
 # Create your views here.
 
 
-class courseList(View):
+class CourseList(View):
     def get(self, request):
 
         return render(request, 'course-list.html')
@@ -22,7 +23,7 @@ class courseList(View):
         pass
 
 
-class teacherList(View):
+class TeacherList(View):
     def get(self, request):
         return render(request, 'teachers-list.html')
 
@@ -31,7 +32,7 @@ class teacherList(View):
 
 
 # 授课机构列表展示
-class orgList(View):
+class OrgList(View):
     def get(self, request):
         # 分页
         try:
@@ -88,7 +89,7 @@ class orgList(View):
 
 
 # 授课机构页表单提交
-class addUserAsk(View):
+class AddUserAsk(View):
     def post(self, request):
         # 此处form 验证有问题
         # askForm = UserAskForm()
@@ -152,3 +153,52 @@ class addUserAsk(View):
             'status': 'success'
         }
         return JsonResponse(data)
+
+
+# 授课机构详情列表页
+class OrgDetailList(View):
+    def get(self, request, org_id):
+        print(type(org_id))
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        courses = course_org.course_set.all()
+        teachers = course_org.teacher_set.all()
+        # courses = Course.objects.filter(course_org=(org_id))
+        # teachers = Teacher.objects.filter(org=(org_id))
+        print('---------')
+        print(org_id)
+        print(course_org)
+        data = {
+            'organization': course_org,
+            'courses': courses,
+            'teachers': teachers,
+            'org_id': org_id,
+            'current_page': 'home',
+        }
+        return render(request, 'org-detail-homepage.html', data)
+
+
+# 机构课程列表
+class OrgCourseList(View):
+    def get(self, request, org_id):
+        course_org = CourseOrg.objects.get(id=int(org_id))
+        courses = course_org.course_set.all()
+        data = {
+            'courses': courses,
+        }
+        return render(request, 'org-detail-course.html', data)
+
+
+# 课程detail列表
+class CourseDetail(View):
+    def get(self, request, course_id):
+        course = Course.objects.get(id=int(course_id))
+        lesson = course.lesson_set.all()
+        lesson_nums = len(lesson)
+        data = {
+            'course': course,
+            'lesson_nums': lesson_nums,
+            'course_org': course.course_org,
+        }
+
+        return render(request, 'course-list.html', data)
+

@@ -1,12 +1,14 @@
 import  re
 
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from django.views.generic.base import View
 from django.db.models import Q
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import CourseOrg,Teacher,CityDict
+from operation.models import UserAsk
+from .forms import UserAskForm
 
 # Create your views here.
 
@@ -28,6 +30,7 @@ class teacherList(View):
         pass
 
 
+# 授课机构列表展示
 class orgList(View):
     def get(self, request):
         # 分页
@@ -83,20 +86,69 @@ class orgList(View):
         }
         return render(request, 'org-list.html', params)
 
+
+# 授课机构页表单提交
+class addUserAsk(View):
     def post(self, request):
+        # 此处form 验证有问题
+        # askForm = UserAskForm()
+        # if askForm.is_valid():
+        #     uses_ask = askForm.save(commit=True)
+        #     data = {
+        #         'status': 'success',
+        #     }
+        #     return JsonResponse(data)
+        # else:
+        #     data = {
+        #         'status': 'fail',
+        #         'msg': askForm.errors,
+        #     }
+        #     print(askForm.errors)
+        #     return JsonResponse(data)
         name = request.POST.get('name', '')
         mobile = request.POST.get('mobile', '')
         course_name = request.POST.get('course_name', '')
 
-        if all[name, mobile, course_name]:
-            result = re.match(r'^\d{11}$', mobile)
-            result = result.group()
-            if result is None:
-                return JsonResponse({'err': '请输入正确格式的手机号'})
+        if not all([name, mobile, course_name]):
+            data = {
+                'status': 'fail',
+                'msg': '以上三项不能为空！'
+            }
+            return JsonResponse(data)
 
-            name_pattern = re.compile(r'^\w+$')
-            name_result = re.match(name_pattern, name)
-            if name_result.group() is None:
-                return JsonResponse({'err': '请输入合法的用户名'})
+        name_pattern = re.compile(r'\w{2,20}')
+        name_result = name_pattern.match(name)
+        if not name_result:
+            data = {
+                'status': 'fail',
+                'msg': '名字长度为2-20的汉字  '
+            }
+            return JsonResponse(data)
 
+        mobile_pattern = re.compile(r'^\d{11}$')
+        mobile_result = mobile_pattern.match(mobile)
+        if not mobile_result:
+            data = {
+                'status': 'fail',
+                'msg': '手机号码必须为11位的纯数字！'
+            }
+            return JsonResponse(data)
 
+        course_pattern = re.compile(r'^\w{1,50}$')
+        course_result = course_pattern.match(mobile)
+        if not course_result:
+            data = {
+                'status': 'fail',
+                'msg': '课程名应在50字以内！'
+            }
+            return JsonResponse(data)
+
+        ask = UserAsk()
+        ask.name = name
+        ask.course_name = course_name
+        ask.mobile = mobile
+        ask.save()
+        data = {
+            'status': 'success'
+        }
+        return JsonResponse(data)

@@ -9,9 +9,9 @@ from users.models import UserProfile
 
 
 class UserAsk(models.Model):
-    name = models.CharField(max_length=20, verbose_name='姓名')
-    mobile = models.CharField(max_length=11, verbose_name='手机')
-    course_name = models.CharField(max_length=50, verbose_name='课程名')
+    name = models.CharField(max_length=20, verbose_name='姓名', null=False)
+    mobile = models.CharField(max_length=11, verbose_name='手机', null=False)
+    course_name = models.CharField(max_length=50, verbose_name='课程名', null=False)
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
